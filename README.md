@@ -15,6 +15,19 @@ npm test               # Playwright: Chromium, WebKit, iPhone and iPad
 npm run icons          # re-render PNG icons from public/icons/icon.svg
 ```
 
+## Hosted
+
+Live at **https://daniel-moen.github.io/halo-light/** (GitHub Pages, served from the `gh-pages` branch).
+
+```sh
+npm run deploy         # build for /halo-light/ into dist-pages/ and push it to gh-pages
+npm run test:pages     # Playwright against a local build served under /halo-light/
+npm run test:live      # Playwright against the live site
+```
+
+The localhost build (`dist/`, base `/`) and the Pages build (`dist-pages/`, base `/halo-light/`) come from the same
+source: the manifest and service worker use paths relative to themselves.
+
 ## Shortcuts
 
 | Key | Action |

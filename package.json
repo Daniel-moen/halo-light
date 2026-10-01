@@ -9,10 +9,15 @@
     "build": "tsc --noEmit && vite build",
     "icons": "node scripts/icons.mjs",
     "serve": "node server.mjs",
-    "test": "playwright test"
+    "test": "playwright test",
+    "build:pages": "tsc --noEmit && BASE=/halo-light/ vite build --outDir dist-pages",
+    "test:pages": "PAGES=1 playwright test",
+    "test:live": "LIVE_URL=https://daniel-moen.github.io/halo-light/ playwright test",
+    "deploy": "npm run build:pages && touch dist-pages/.nojekyll && gh-pages -d dist-pages -t -m \"Deploy $(git rev-parse --short HEAD)\""
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
+    "gh-pages": "^6.3.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.2"
   }

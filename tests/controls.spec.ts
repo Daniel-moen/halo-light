@@ -117,6 +117,6 @@ test('corrupt storage falls back to defaults', async ({ page }) => {
     localStorage.setItem('halo.settings.v1', '{"kelvin":99999,"shape":"nope","brightness":"x"}');
     localStorage.setItem('halo.presets.v1', 'not json');
   });
-  await page.goto('/');
+  await page.goto('./');
   expect(await current(page)).toMatchObject({ kelvin: 6500, shape: 'ring', brightness: 100 });
 });

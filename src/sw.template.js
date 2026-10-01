@@ -1,6 +1,8 @@
 // Halo Light service worker: precache the whole app so it works offline.
 const CACHE = 'halo-__VERSION__';
+// Relative to this script, so the app works at / or under a sub-path.
 const URLS = __URLS__;
+const SHELL = new URL('./', self.location).href;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((c) => c.addAll(URLS)).then(() => self.skipWaiting()));
@@ -20,7 +22,7 @@ self.addEventListener('fetch', (event) => {
   if (req.mode === 'navigate') {
     // Network first for the page so updates arrive; cached shell when offline.
     event.respondWith(
-      fetch(req).catch(() => caches.match('/', { cacheName: CACHE })),
+      fetch(req).catch(() => caches.match(SHELL, { cacheName: CACHE })),
     );
     return;
   }

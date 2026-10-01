@@ -27,7 +27,7 @@ export async function open(page: Page, settings?: Partial<Settings>) {
       }
     }, settings);
   }
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.locator('#panel')).toBeVisible();
 }
 

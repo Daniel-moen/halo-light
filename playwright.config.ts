@@ -1,15 +1,20 @@
 import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 4173;
+// PAGES=1: build and serve under /halo-light/ like GitHub Pages.
+// LIVE_URL=https://…/halo-light/: test a deployed site (no local server).
+const LIVE_URL = process.env.LIVE_URL;
+const BASE = process.env.PAGES ? '/halo-light/' : '/';
+const build = process.env.PAGES ? 'npm run build:pages' : 'npm run build';
 
 export default defineConfig({
   testDir: 'tests',
   fullyParallel: true,
   reporter: [['list']],
-  use: { baseURL: `http://127.0.0.1:${PORT}` },
-  webServer: {
-    command: `npm run build && node server.mjs ${PORT} 127.0.0.1`,
-    url: `http://127.0.0.1:${PORT}`,
+  use: { baseURL: LIVE_URL ?? `http://127.0.0.1:${PORT}${BASE}` },
+  webServer: LIVE_URL ? undefined : {
+    command: `${build} && DIST=${process.env.PAGES ? 'dist-pages' : 'dist'} BASE=${BASE} node server.mjs ${PORT} 127.0.0.1`,
+    url: `http://127.0.0.1:${PORT}${BASE}`,
     reuseExistingServer: false,
     timeout: 60_000,
   },

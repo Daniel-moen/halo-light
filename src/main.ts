@@ -477,7 +477,7 @@ installBtn.addEventListener('click', async () => {
 window.addEventListener('appinstalled', () => { installBtn.hidden = true; });
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+  window.addEventListener('load', () => navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {}));
 }
 
 // ---------- Boot ----------
