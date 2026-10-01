@@ -1,0 +1,19 @@
+{
+  "name": "halo-light",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Halo — a screen ring light you own. Installable, offline PWA.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "icons": "node scripts/icons.mjs",
+    "serve": "node server.mjs",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.2"
+  }
+}
